@@ -1,0 +1,23 @@
+PROJECT TITLE: CarePoint — Hospital Management System
+
+OBJECTIVE
+To develop a user-friendly web application that helps hospital staff manage patient records, doctor information, appointments and billing from one dashboard.
+
+TECHNOLOGIES
+Python, Flask, SQLite, HTML5, CSS3 and JavaScript.
+
+MODULES
+1. Dashboard — hospital KPIs, recent patient registrations, and appointment overview.
+2. Patient Management — register patients, search records, and view patient history.
+3. Doctor Management — add doctors, specialties, contact information, rooms and availability.
+4. Appointment Management — book appointments and update appointment status.
+5. Billing & Payments — create bills, record full or partial payments, and track outstanding balances.
+6. Global Search — search patients, doctors and appointments.
+7. User Interface — responsive layout, navigation sidebar, notifications and dark mode.
+
+DEMO LOGIN
+Username: admin
+Password: admin123
+
+NOTE
+The application is for educational/demo use and contains fictional sample records. Do not use real patient data or deploy publicly without a security and privacy review.

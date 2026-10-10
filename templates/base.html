@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}CarePoint{% endblock %} · Hospital Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="{{ url_for('dashboard') }}"><span class="brand-mark">✚</span><span><b>CarePoint</b><small>HOSPITAL SUITE</small></span></a>
+    <div class="side-label">WORKSPACE</div>
+    <nav class="nav-links">
+      <a class="{% if request.endpoint == 'dashboard' %}active{% endif %}" href="{{ url_for('dashboard') }}"><span>▦</span> Overview</a>
+      <a class="{% if request.endpoint in ['patients','patient_detail'] %}active{% endif %}" href="{{ url_for('patients') }}"><span>♙</span> Patients</a>
+      <a class="{% if request.endpoint == 'doctors' %}active{% endif %}" href="{{ url_for('doctors') }}"><span>⚕</span> Doctors</a>
+      <a class="{% if request.endpoint in ['appointments','appointment_status'] %}active{% endif %}" href="{{ url_for('appointments') }}"><span>▣</span> Appointments</a>
+      <a class="{% if request.endpoint in ['billing','pay_bill'] %}active{% endif %}" href="{{ url_for('billing') }}"><span>＄</span> Billing & Payments</a>
+      <a class="{% if request.endpoint == 'search' %}active{% endif %}" href="{{ url_for('search') }}"><span>⌕</span> Global Search</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="help-card"><div class="help-icon">✦</div><b>Care that connects.</b><p>One calm space for your daily hospital operations.</p></div>
+      <a class="nav-item" href="{{ url_for('settings') }}"><span>⚙</span> Preferences</a>
+      <a class="nav-item" href="{{ url_for('logout') }}"><span>↪</span> Sign out</a>
+      <div class="user-mini"><div class="avatar">A</div><div><b>{{ session.get('username','Admin')|title }}</b><small>Administrator</small></div><span class="online-dot"></span></div>
+    </div>
+  </aside>
+  <main class="main-area">
+    <header class="topbar">
+      <button class="icon-btn mobile-menu" id="menuToggle" aria-label="Toggle menu">☰</button>
+      <div class="breadcrumb">Workspace <span>/</span> <b>{% block crumb %}Overview{% endblock %}</b></div>
+      <div class="top-actions">
+        <form class="top-search" action="{{ url_for('search') }}"><span>⌕</span><input name="q" placeholder="Search records..." aria-label="Search records"></form>
+        <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">☾</button>
+        <div class="top-avatar">A</div>
+      </div>
+    </header>
+    <section class="page-content">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}<div class="flash-stack">{% for category,message in messages %}<div class="flash {{ category }}">{{ message }}<button onclick="this.parentElement.remove()">×</button></div>{% endfor %}</div>{% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+      <footer class="footer">© {{ current_year }} CarePoint Health Systems <span>•</span> Better coordination, better care.</footer>
+    </section>
+  </main>
+</div>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
