@@ -277,6 +277,7 @@ def search():
 def settings():
     return render_template("settings.html")
 
+init_db()
+
 if __name__ == "__main__":
-    init_db()
     app.run(debug=True, port=int(os.environ.get("PORT", 5000)))
